@@ -24,6 +24,7 @@ import { MdAccountTree } from "react-icons/md";
 import { FaUserSecret } from "react-icons/fa6";
 import { BsHeartPulseFill } from "react-icons/bs";
 import { LiaKhandaSolid } from "react-icons/lia";
+import { CgDollar } from "react-icons/cg";
 
 //IT CLOUD INFORMATION
 import { AiTwotoneAppstore } from "react-icons/ai";
@@ -98,12 +99,18 @@ class Header extends Component{
                 <div className="hrcloud-d-card-container">
                     <img src="img\hrcloud.png" className="hrcloud-d-image" alt="hrcloud"/>
                     <h1 className="hrcloud-d-head">HR Cloud</h1>
-                    <p className="hrcloud-d-desc">Manage and autonate the employe lifecycle</p>
+                    <p className="hrcloud-d-desc1">Manage and autonate the employe lifecycle</p>
                     <button className="hrcloud-d-button">Learn More</button>
+                    <Link to="hrlogin">
+                        <button type="button" className="hr-login-button">Login</button>
+                    </Link>
+                    <Link to="employedb">
+                        <button type="button" className="hr-login-button1">Employe Attendance</button>
+                    </Link>
                 </div>
                 <div className="hrcloud-d-card-container">
                     <div className="hrcloud-d-item-container">
-                        <FaRupeeSign className="hrcloud-d-item-icon"/>
+                        <CgDollar className="hrcloud-d-item-icon"/>
                         <div className="hrcloud-d-name-container">
                             <h1 className="hrcloud-d-name">Us Payroll</h1>
                             <p className="hrcloud-d-name-desc">Run payroll in minutes</p>
@@ -114,10 +121,10 @@ class Header extends Component{
                         <GiGlobe className="hrcloud-d-item-icon"/>
                         <div className="hrcloud-d-name-container">
                             <h1 className="hrcloud-d-name">Global Payroll</h1>
-                            <p className="hrcloud-d-name-desc">Pay Your entire workforce</p>
+                            <p className="hrcloud-d-name-desc">Pay YoRecruitingur entire workforce</p>
                         </div> 
                     </div>
-                    <Link to="./Recruiting" >
+                    <Link className="hrc-d-item-link" to="Recruiting" >
                     <div className="hrcloud-d-item-container">
                         <FaSearchengin className="hrcloud-d-item-icon"/>
                         <div className="hrcloud-d-name-container">
@@ -155,10 +162,12 @@ class Header extends Component{
                 <div className="hrcloud-d-card-container">
                     <div className="hrcloud-d-item-container">
                         <IoMdClock className="hrcloud-d-item-icon"/>
+                        <Link className="hrc-d-item-link" to="empattendance" >
                         <div className="hrcloud-d-name-container">
                             <h1 className="hrcloud-d-name">Time & Attandance</h1>
                             <p className="hrcloud-d-name-desc">Easyly Track & Aprove Time</p>
-                        </div> 
+                        </div>
+                        </Link>
                     </div>
     
                     <div className="hrcloud-d-item-container">
@@ -203,7 +212,7 @@ class Header extends Component{
         return ( <button onClick={this.onClickToHiden} type="button" className="hiden-page-button">
         <ul className="products-card-container">
                     {productCardsList.map((eachItem) => (
-                    <Link className="" to={"/" + eachItem.uniqueId}>  
+                    <Link className="product-item-link" to={"/" + eachItem.uniqueId}>  
                         <li className="product-item">
                             <h1 className="preoduct-head">{eachItem.productName}</h1>
                             <p className="product-desc">{eachItem.content}</p>
@@ -222,7 +231,7 @@ class Header extends Component{
             <div className="hrcloud-d-card-container">
                 <img src="img\itcloud.png" className="hrcloud-d-image" alt="itcloud"/>
                 <h1 className="hrcloud-d-head">IT Cloud</h1>
-                <p className="hrcloud-d-desc">Remotly secure and configure your compeny's IT</p>
+                <p className="hrcloud-d-desc1">Remotly secure and configure your compeny's IT</p>
                 <button className="hrcloud-d-button">Learn More</button>
             </div>
             <div className="hrcloud-d-card-container">
@@ -255,7 +264,7 @@ class Header extends Component{
             <div className="hrcloud-d-card-container">
                 <img src="img\financecloud.webp" className="hrcloud-d-image" alt="financecloud"/>
                 <h1 className="hrcloud-d-head">Finance Cloud</h1>
-                <p className="hrcloud-d-desc">Control and report on your spend in one place</p>
+                <p className="hrcloud-d-desc1">Control and report on your spend in one place</p>
                 <button className="hrcloud-d-button">Learn More</button>
             </div>
             <div className="hrcloud-d-card-container">
@@ -383,13 +392,16 @@ class Header extends Component{
         const {history} = this.props
         this.setState({loginButtonStatus: true})
         Cookies.remove("jwt_token")
+        Cookies.remove("login_status")
         history.replace("/")
+        this.setState({producstStatus:false})
     }
 
     onClickLogin = () => {
         const {history} = this.props
         this.setState({loginButtonStatus: false})
         history.replace("/login")
+        this.setState({producstStatus:false})
     }
 
     
@@ -400,6 +412,11 @@ class Header extends Component{
     logoutStatus = () => {
         return <button className="login-button" type="button" onClick={this.onClickLogin}>Login</button>
     }
+
+    onClickImage = () => {
+        this.setState({producstStatus:false})
+    }
+
 
 
     render(){
@@ -414,10 +431,10 @@ class Header extends Component{
 
 
     return(
-        <nav className="nav-main-container">
+        <nav onClick={this.onClickNav} className="nav-main-container">
             <div className="nav-container">
                 <Link to="/">
-                    <img className="nav-image" src="img\applogo.png" alt="head"/>
+                    <img onClick={this.onClickImage} className="nav-image" src="img\applogo.png" alt="head"/>
                 </Link>
                 <ul className="nav-items">
                     <li className="nav-item">
