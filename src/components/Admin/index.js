@@ -6,17 +6,14 @@ import Cookies from "js-cookie";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 const Admin = () => {
-  let displayData = []
-  const [btnStatus, setBtnStatus] = useState(0)
-  const [userData, setAdminData] = useState([]);
-  const [intData, setIntData] = useState([]);
-  const [intDataDB, setIntDataDB] = useState([]);
+  const [userData, setAdminData] = useState([])
+  const [intData, setIntData] = useState([])
+  const [intDataDB, setIntDataDB] = useState([])
   const [offData, setOffData] = useState([])
-  const [offDataDB, setOffDataDB] = useState([]);
+  const [offDataDB, setOffDataDB] = useState([])
   const [onboardingData, setOnboardingData] = useState([])
   const [onboardingDataDB, setOnboardingDataDB] = useState([])
   const [employeDataDB, setEmployeDataDB] = useState([])
-  const [offAcpData, setOffAcpData] = useState([])
   const [hrData, setHRData] = useState([]);
   const [checkboxStatus, setCheckboxStatus] = useState({isChecked:false, userId:""})
   const [intCheckboxStatus, setIntCheckboxStatus] = useState({isChecked:false, userId:""})
@@ -43,7 +40,7 @@ const Admin = () => {
       .then(res => setHRData(res.data))
       .catch(err => {
         alert(err);
-      });
+      }, []);
     }else if (loginStatus === "ADMIN"){
       axios.get('http://localhost:5000/admindata')
       .then(res => setHRData(res.data))
@@ -51,7 +48,7 @@ const Admin = () => {
         alert(err);
       });
     }   
-  }, []);
+  }, [loginStatus]);
 
   //GET INTERVIEW DATA
   useEffect(() => {
@@ -68,7 +65,7 @@ const Admin = () => {
       .catch(err => {
         alert(err);
       });
-  }, []);
+  }, [token]);
 
   //GET ACCEPTED DATA
   useEffect(() => {
@@ -85,7 +82,7 @@ const Admin = () => {
       .catch(err => {
         console.error(err);
       });
-  }, []);
+  }, [token]);
 
 //GET ONBOARDING DATA
 useEffect(() => {
@@ -102,7 +99,7 @@ useEffect(() => {
     .catch(err => {
       alert(err);
     });
-}, []);
+}, [token]);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -155,7 +152,6 @@ useEffect(() => {
     for (let eachItem of userData){
       if (eachItem.id === id){
         setIntDataDB(eachItem)
-        setBtnStatus(eachItem.id)
       }
     }
   }
@@ -165,7 +161,6 @@ useEffect(() => {
     for (let eachItem of intData){
       if (eachItem.id === id){
         setOffDataDB(eachItem)
-        setBtnStatus(eachItem.id)
       }
     }
   }
@@ -175,7 +170,6 @@ useEffect(() => {
     for (let eachItem of offData){
       if (eachItem.id === id){
         setOnboardingDataDB(eachItem)
-        setBtnStatus(eachItem.id)
       }
     }
   }
@@ -185,7 +179,6 @@ useEffect(() => {
     for (let eachItem of onboardingData){
       if (eachItem.id === id){
         setEmployeDataDB(eachItem)
-        setBtnStatus(eachItem.id)
       }
     }
   }

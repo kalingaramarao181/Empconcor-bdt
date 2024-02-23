@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './index.css'
-import {BrowserRouter, Switch, Route} from "react-router-dom"
 const EmployeAttendance = () => {
   const [employe,setEmploye] = useState([])
   const [attendanceData,setAttendanceData] = useState([])
